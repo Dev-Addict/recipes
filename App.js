@@ -3,6 +3,8 @@ import {StyleSheet, Text, View, SafeAreaView, StatusBar, Platform} from 'react-n
 import * as Font from 'expo-font';
 import {AppLoading} from "expo";
 
+import RecipeNavigator from "./navigations/RecipesNavigator";
+
 const fetchFonts = () => {
     return Font.loadAsync({
         'libre-baskerville': require('./assets/fonts/libre-baskerville-regular.ttf'),
@@ -20,18 +22,14 @@ const App = () => {
         );
 
     return (
-        <SafeAreaView>
-            <View style={{...styles.app, ...(Platform.OS === 'android' ? {paddingTop: StatusBar.currentHeight} : {})}}>
-                <Text>App</Text>
-            </View>
-        </SafeAreaView>
+        <RecipeNavigator/>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#222',
+        backgroundColor: '#222'
     },
 });
 
