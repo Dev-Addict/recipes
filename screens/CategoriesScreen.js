@@ -7,7 +7,10 @@ const CategoriesScreen = ({navigation: {navigate}}) => {
     const renderGridItem = (itemData) => {
         return (
             <TouchableOpacity activeOpacity={0.7} onPress={() => navigate({
-                routeName: 'CategoryRecipes'
+                routeName: 'CategoryRecipes',
+                params: {
+                    id: itemData.item.id
+                }
             })} style={{...styles.gridItem, backgroundColor: itemData.item.color}}>
                 <View>
                     <Text style={styles.category}>{itemData.item.title.toUpperCase()}</Text>

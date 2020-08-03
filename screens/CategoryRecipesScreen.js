@@ -1,10 +1,16 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-const CategoryRecipesScreen = () => {
+import {CATEGORIES} from "../data/data";
+
+const CategoryRecipesScreen = ({navigation: {getParam}}) => {
+    const id = getParam('id');
+
+    const category = CATEGORIES.find(category => category.id === id);
+
     return (
         <View style={styles.screen}>
-            <Text>Category Recipes Screen</Text>
+            <Text>{category.title} Recipes</Text>
         </View>
     );
 };
