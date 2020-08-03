@@ -6,7 +6,7 @@ import {CATEGORIES} from "../data/data";
 const CategoriesScreen = ({navigation: {navigate}}) => {
     const renderGridItem = (itemData) => {
         return (
-            <TouchableOpacity activeOpacity={0.7} onPress={() => navigate({
+            <TouchableOpacity activeOpacity={0.6} onPress={() => navigate({
                 routeName: 'CategoryRecipes',
                 params: {
                     id: itemData.item.id
@@ -41,10 +41,21 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     gridItem: {
-        width: '50%',
-        height: Dimensions.get('window').width / 2,
-        justifyContent: 'center',
-        alignItems: 'center'
+        width: Dimensions.get('window').width / 2 - 20,
+        height: Dimensions.get('window').width / 2 - 40,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        margin: 10,
+        borderRadius: 20,
+        elevation: 3,
+        shadowOpacity: 0.26,
+        shadowColor: 'black',
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowRadius: 20,
+        padding: 20
     },
     category: {
         color: '#f5f6f7',
