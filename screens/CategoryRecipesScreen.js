@@ -15,6 +15,20 @@ const CategoryRecipesScreen = ({navigation: {getParam}}) => {
     );
 };
 
+CategoryRecipesScreen.navigationOptions = ({navigation: {getParam}}) => {
+    const id = getParam('id');
+
+    const category = CATEGORIES.find(category => category.id === id);
+
+    return {
+        headerTitle: `${category.title} Recipes`,
+        headerStyle: {
+            backgroundColor: category.color
+        },
+        headerTintColor: '#f5f6f7'
+    };
+};
+
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
