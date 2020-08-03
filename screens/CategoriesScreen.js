@@ -6,7 +6,7 @@ import {CATEGORIES} from "../data/data";
 const CategoriesScreen = ({navigation: {navigate}}) => {
     const renderGridItem = (itemData) => {
         return (
-            <TouchableOpacity activeOpacity={0.6} onPress={() => navigate({
+            <TouchableOpacity activeOpacity={0.7} onPress={() => navigate({
                 routeName: 'CategoryRecipes',
                 params: {
                     id: itemData.item.id
