@@ -1,4 +1,5 @@
 import Category from "../models/category";
+import Recipe from "../models/Recipe";
 
 export const CATEGORIES = [
     new Category('01', 'Italian', '#D980FA'),
@@ -12,3 +13,5 @@ export const CATEGORIES = [
     new Category('07', 'French', '#0fbcf9'),
     new Category('10', 'Indian', '#FD7272')
 ];
+
+export const RECIPES = [];
