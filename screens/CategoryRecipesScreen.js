@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, FlatList} from 'react-native';
+import {HeaderButtons, Item} from "react-navigation-header-buttons";
 
+import HeaderButton from '../components/HeaderButton';
 import Recipe from "../components/Recipe";
 import {CATEGORIES, RECIPES} from "../data/data";
 
@@ -19,7 +21,7 @@ const CategoryRecipesScreen = ({navigation: {getParam, navigate}}) => {
     );
 };
 
-CategoryRecipesScreen.navigationOptions = ({navigation: {getParam}}) => {
+CategoryRecipesScreen.navigationOptions = ({navigation: {getParam, toggleDrawer}}) => {
     const id = getParam('id');
 
     const category = CATEGORIES.find(category => category.id === id);
@@ -29,7 +31,12 @@ CategoryRecipesScreen.navigationOptions = ({navigation: {getParam}}) => {
         headerStyle: {
             backgroundColor: category.color
         },
-        headerTintColor: '#f5f6f7'
+        headerTintColor: '#f5f6f7',
+        headerLeft: (
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item title="menu" iconName="ios-menu" onPress={() => toggleDrawer()}/>
+            </HeaderButtons>
+        )
     };
 };
 

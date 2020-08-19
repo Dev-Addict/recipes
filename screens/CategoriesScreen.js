@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, Text, FlatList, Dimensions, TouchableOpacity} from 'react-native';
+import {HeaderButtons, Item} from "react-navigation-header-buttons";
 
+import HeaderButton from '../components/HeaderButton';
 import {CATEGORIES} from "../data/data";
 
 const CategoriesScreen = ({navigation: {navigate}}) => {
@@ -26,13 +28,18 @@ const CategoriesScreen = ({navigation: {navigate}}) => {
     );
 };
 
-CategoriesScreen.navigationOptions = {
+CategoriesScreen.navigationOptions = ({navigation: {toggleDrawer}}) => ({
     headerTitle: 'Categories',
     headerStyle: {
         backgroundColor: '#0fbcf9'
     },
-    headerTintColor: '#f5f6f7'
-};
+    headerTintColor: '#f5f6f7',
+    headerLeft: (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item title="menu" iconName="ios-menu" onPress={() => toggleDrawer()}/>
+        </HeaderButtons>
+    )
+});
 
 const styles = StyleSheet.create({
     screen: {

@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, FlatList, View} from 'react-native';
+import {HeaderButtons, Item} from "react-navigation-header-buttons";
 
+import HeaderButton from '../components/HeaderButton';
 import {FAVORITE_RECIPES, RECIPES, CATEGORIES} from "../data/data";
 import Recipe from "../components/Recipe";
 
@@ -18,13 +20,18 @@ const FavoriteRecipesScreen = ({navigation: {navigate}}) => {
     );
 };
 
-FavoriteRecipesScreen.navigationOptions = {
+FavoriteRecipesScreen.navigationOptions = ({navigation: {toggleDrawer}}) => ({
     headerTitle: 'Favorite Recipes',
     headerStyle: {
         backgroundColor: '#9980FA'
     },
-    headerTintColor: '#f5f6f7'
-};
+    headerTintColor: '#f5f6f7',
+    headerLeft: (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+            <Item title="menu" iconName="ios-menu" onPress={() => toggleDrawer()}/>
+        </HeaderButtons>
+    )
+});
 
 const styles = StyleSheet.create({
     screen: {

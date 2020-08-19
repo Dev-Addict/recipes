@@ -1,13 +1,19 @@
 import React from 'react';
-import {createStackNavigator, createAppContainer, createBottomTabNavigator} from 'react-navigation';
+import {
+    createStackNavigator,
+    createAppContainer,
+    createBottomTabNavigator,
+    createDrawerNavigator
+} from 'react-navigation';
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs';
 import {Platform} from 'react-native';
-import {Ionicons} from "@expo/vector-icons";
+import {Ionicons, FontAwesome} from "@expo/vector-icons";
 
 import CategoriesScreen from "../screens/CategoriesScreen";
 import CategoryRecipesScreen from "../screens/CategoryRecipesScreen";
 import RecipeScreen from "../screens/RecipeScreen";
 import FavoriteRecipesScreen from "../screens/FavoriteRecipesScreen";
+import FiltersScreen from "../screens/FiltersScreen";
 
 const RecipeNavigator = createStackNavigator({
     Categories: CategoriesScreen,
@@ -48,4 +54,29 @@ const RecipeTabNavigator = Platform.OS === 'android' ? createMaterialBottomTabNa
     }
 });
 
-export default createAppContainer(RecipeTabNavigator);
+const FiltersNavigator = createStackNavigator({
+    Filters: FiltersScreen
+});
+
+const drawerNavigator = createDrawerNavigator({
+    Home: {
+        screen: RecipeTabNavigator,
+        navigationOptions: {
+            drawerIcon: (drawerInfo) => <Ionicons name="md-home" size={24} color={drawerInfo.tintColor}/>
+        }
+    },
+    Filters: {
+        screen: FiltersNavigator,
+        navigationOptions: {
+            drawerIcon: (drawerInfo) => <FontAwesome name="filter" size={24} color={drawerInfo.tintColor}/>
+        }
+    }
+}, {
+    contentOptions: {
+        labelStyle: {
+            fontFamily: 'libre-baskerville-bold'
+        }
+    }
+});
+
+export default createAppContainer(drawerNavigator);

@@ -17,7 +17,7 @@ const RecipeScreen = ({navigation: {getParam}}) => {
     );
 };
 
-RecipeScreen.navigationOptions = ({navigation: {getParam}}) => {
+RecipeScreen.navigationOptions = ({navigation: {getParam, toggleDrawer}}) => {
     const id = getParam('id');
 
     const recipe = RECIPES.find(recipe => recipe.id === id);
@@ -33,6 +33,11 @@ RecipeScreen.navigationOptions = ({navigation: {getParam}}) => {
         headerRight: (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item title="Favorite" iconName="ios-star" onPress={() => {}}/>
+            </HeaderButtons>
+        ),
+        headerLeft: (
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item title="menu" iconName="ios-menu" onPress={() => toggleDrawer()}/>
             </HeaderButtons>
         )
     };
