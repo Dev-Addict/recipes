@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 
+import HeaderButton from "../components/HeaderButton";
 import {CATEGORIES, RECIPES} from "../data/data";
 
 const RecipeScreen = ({navigation: {getParam}}) => {
@@ -10,7 +12,7 @@ const RecipeScreen = ({navigation: {getParam}}) => {
 
     return (
         <View style={styles.screen}>
-            <Text>Recipe Screen</Text>
+            <Text>{recipe.title}</Text>
         </View>
     );
 };
@@ -27,7 +29,12 @@ RecipeScreen.navigationOptions = ({navigation: {getParam}}) => {
         headerStyle: {
             backgroundColor: category.color
         },
-        headerTintColor: '#f5f6f7'
+        headerTintColor: '#f5f6f7',
+        headerRight: (
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item title="Favorite" iconName="ios-star" onPress={() => {}}/>
+            </HeaderButtons>
+        )
     };
 };
 

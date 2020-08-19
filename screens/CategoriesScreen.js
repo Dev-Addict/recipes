@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         margin: 10,
         borderRadius: 20,
-        elevation: 3,
+        elevation: 13,
         shadowOpacity: 0.26,
         shadowColor: 'black',
         shadowOffset: {
