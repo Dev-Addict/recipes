@@ -29,7 +29,7 @@ const CategoriesScreen = ({navigation: {navigate}}) => {
 CategoriesScreen.navigationOptions = {
     headerTitle: 'Categories',
     headerStyle: {
-        backgroundColor: '#ffa502'
+        backgroundColor: '#0fbcf9'
     },
     headerTintColor: '#f5f6f7'
 };

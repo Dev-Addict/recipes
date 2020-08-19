@@ -335,3 +335,5 @@ export const RECIPES = [
         true
     )
 ];
+
+export const FAVORITE_RECIPES = ['m1', 'm4', 'm7', 'm9'];
