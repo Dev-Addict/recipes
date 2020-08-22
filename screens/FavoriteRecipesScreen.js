@@ -1,13 +1,16 @@
 import React from 'react';
 import {StyleSheet, FlatList, View} from 'react-native';
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
+import {useSelector} from "react-redux";
 
 import HeaderButton from '../components/HeaderButton';
-import {FAVORITE_RECIPES, RECIPES, CATEGORIES} from "../data/data";
+import {RECIPES, CATEGORIES} from "../data/data";
 import Recipe from "../components/Recipe";
 
 const FavoriteRecipesScreen = ({navigation: {navigate}}) => {
-    const favoriteRecipes = RECIPES.filter(({id}) => FAVORITE_RECIPES.includes(id));
+    const favoriteRecipeIds = useSelector(({favoriteRecipes}) => favoriteRecipes);
+
+    const favoriteRecipes = RECIPES.filter(({id}) => favoriteRecipeIds.includes(id));
 
     return (
         <View style={styles.screen}>

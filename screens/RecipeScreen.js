@@ -3,12 +3,9 @@ import {StyleSheet, View, ImageBackground, ScrollView, Text} from 'react-native'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 
 import HeaderButton from "../components/HeaderButton";
-import {CATEGORIES, RECIPES, FAVORITE_RECIPES} from "../data/data";
 
 const RecipeScreen = ({navigation: {getParam}}) => {
-    const id = getParam('id');
-
-    const {complexity, duration, affordability, ingredients, steps, isGlutenFree, isLactoseFree, isVegan, isVegetarian, imageUrl} = RECIPES.find(recipe => recipe.id === id);
+    const {complexity, duration, affordability, ingredients, steps, isGlutenFree, isLactoseFree, isVegan, isVegetarian, imageUrl} = getParam('recipe');
 
     return (
         <ScrollView>
@@ -51,11 +48,9 @@ const RecipeScreen = ({navigation: {getParam}}) => {
 };
 
 RecipeScreen.navigationOptions = ({navigation: {getParam, toggleDrawer}}) => {
-    const id = getParam('id');
+    const recipe = getParam('recipe');
 
-    const recipe = RECIPES.find(recipe => recipe.id === id);
-
-    const category = CATEGORIES.find(category => category.id === recipe.categoryIds[0]);
+    const category = getParam('category');
 
     return {
         headerTitle: `${recipe.title} Recipes`,
