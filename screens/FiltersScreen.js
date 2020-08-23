@@ -1,32 +1,22 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {StyleSheet, View, Text, Switch} from 'react-native';
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
+import {useDispatch, useSelector} from "react-redux";
 
 import HeaderButton from '../components/HeaderButton';
+import {toggleFilterState} from "../actions";
 
-const FiltersScreen = ({navigation: {setParams}}) => {
-    const [isGlutenFree, setGlutenFree] = useState('false');
-    const [isVegan, setVegan] = useState('false');
-    const [isVegetarian, setVegetarian] = useState('false');
-    const [isLactoseFree, setLactoseFree] = useState('false');
+const FiltersScreen = () => {
+    const dispatch = useDispatch();
+    
+    const {isGlutenFree, isVegan, isVegetarian, isLactoseFree} = useSelector(({filters}) => filters);
 
-    const saveFilters = useCallback(() => ({
-        glutenFree: isGlutenFree,
-        vegan: isVegan,
-        vegetarian: isVegetarian,
-        lactoseFree: isLactoseFree
-    }), [isGlutenFree, isVegan, isVegetarian, isLactoseFree]);
-
-    useEffect(() => {
-        setParams({
-            save: saveFilters
-        });
-    }, [saveFilters]);
-
-    const FilterSwitch = ({text, value, setValue}) => (
+    const FilterSwitch = ({text, value, filter}) => (
         <View style={styles.filterItem}>
             <Text>{text}</Text>
-            <Switch value={value} onValueChange={setValue} trackColor={{true: '#9980FA', false: '#D6A2E8'}}
+            <Switch value={value} onValueChange={() => {
+                dispatch(toggleFilterState(filter));
+            }} trackColor={{true: '#9980FA', false: '#D6A2E8'}}
                     thumbColor="#0fbcf9"/>
         </View>
     );
@@ -35,10 +25,10 @@ const FiltersScreen = ({navigation: {setParams}}) => {
         <View style={styles.screen}>
             <Text style={styles.title}>Available Filters</Text>
             <View style={styles.filterContainer}>
-                <FilterSwitch text="Gluten Free" value={isGlutenFree} setValue={setGlutenFree}/>
-                <FilterSwitch text="Gluten Free" value={isVegan} setValue={setVegan}/>
-                <FilterSwitch text="Gluten Free" value={isVegetarian} setValue={setVegetarian}/>
-                <FilterSwitch text="Gluten Free" value={isLactoseFree} setValue={setLactoseFree}/>
+                <FilterSwitch text="Gluten Free" value={isGlutenFree} filter="isGlutenFree"/>
+                <FilterSwitch text="Vegan" value={isVegan} filter="isVegan"/>
+                <FilterSwitch text="Vegetarian" value={isVegetarian} filter="isVegetarian"/>
+                <FilterSwitch text="Lactose Free" value={isLactoseFree} filter="isLactoseFree"/>
             </View>
         </View>
     );
@@ -53,11 +43,6 @@ FiltersScreen.navigationOptions = ({navigation: {toggleDrawer, getParam}}) => ({
     headerLeft: (
         <HeaderButtons HeaderButtonComponent={HeaderButton}>
             <Item title="menu" iconName="ios-menu" onPress={() => toggleDrawer()}/>
-        </HeaderButtons>
-    ),
-    headerRight: (
-        <HeaderButtons HeaderButtonComponent={HeaderButton}>
-            <Item title="menu" iconName="md-save" onPress={() => getParam('save')}/>
         </HeaderButtons>
     )
 });

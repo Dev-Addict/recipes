@@ -16,7 +16,7 @@ const FavoriteRecipesScreen = ({navigation: {navigate}}) => {
         <View style={styles.screen}>
             <FlatList data={favoriteRecipes} keyExtractor={item => item.id}
                       renderItem={props =>
-                          <Recipe navigate={navigate}
+                          <Recipe navigate={navigate} isFav={true}
                                   category={CATEGORIES.find(({id}) => props.item.categoryIds[0] === id)}
                                   {...props}/>}/>
         </View>

@@ -8,7 +8,7 @@ const filtersReducer = (state = {
 }, action) => {
     if (action.type === toggleFilterStateActionType) {
         state[action.payload] = !state[action.payload];
-        return state;
+        return {...state};
     }
     return state;
 };

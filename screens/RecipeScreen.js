@@ -1,11 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, View, ImageBackground, ScrollView, Text} from 'react-native';
 import {HeaderButtons, Item} from 'react-navigation-header-buttons';
 
 import HeaderButton from "../components/HeaderButton";
+import {useDispatch, useSelector} from "react-redux";
+import {addRecipeToFavorites, removeRecipeFromFavorites} from "../actions";
 
-const RecipeScreen = ({navigation: {getParam}}) => {
+const RecipeScreen = ({navigation: {getParam, setParams}}) => {
     const {complexity, duration, affordability, ingredients, steps, isGlutenFree, isLactoseFree, isVegan, isVegetarian, imageUrl} = getParam('recipe');
+
+    const dispatch = useDispatch();
+
+    const favoriteRecipes = useSelector(({favoriteRecipes}) => favoriteRecipes);
+
+    useEffect(() => {
+        setParams({
+            dispatch,
+            favoriteRecipes
+        });
+    }, [favoriteRecipes]);
 
     return (
         <ScrollView>
@@ -48,21 +61,34 @@ const RecipeScreen = ({navigation: {getParam}}) => {
 };
 
 RecipeScreen.navigationOptions = ({navigation: {getParam, toggleDrawer}}) => {
-    const recipe = getParam('recipe');
+    const {id, title} = getParam('recipe');
 
-    const category = getParam('category');
+    const {color} = getParam('category');
+
+    const dispatch = getParam('dispatch');
+
+    const favoriteRecipes = getParam('favoriteRecipes');
+
+    const isFav = favoriteRecipes ? favoriteRecipes.includes(id) : getParam('isFav');
 
     return {
-        headerTitle: `${recipe.title} Recipes`,
+        headerTitle: `${title} Recipes`,
         headerStyle: {
-            backgroundColor: category.color
+            backgroundColor: color
         },
         headerTintColor: '#f5f6f7',
         headerRight: (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item title="Favorite" iconName="ios-star" onPress={() => {
+                {isFav ?
+                    <Item title="Favorite" iconName="ios-star" onPress={() => {
+                        dispatch(removeRecipeFromFavorites(id));
+                    }
+                    }/> :
+                    <Item title="Favorite" iconName="ios-star-outline" onPress={() => {
+                        dispatch(addRecipeToFavorites(id));
+                    }
+                    }/>
                 }
-                }/>
             </HeaderButtons>
         ),
         headerLeft: (

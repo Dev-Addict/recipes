@@ -14,6 +14,8 @@ const CategoryRecipesScreen = ({navigation: {getParam, navigate}}) => {
 
     const filters = useSelector(({filters}) => filters);
 
+    const favoriteRecipes = useSelector(({favoriteRecipes}) => favoriteRecipes);
+
     const categoryRecipes = RECIPES.filter(recipe => {
         if (Object.entries(filters).map(
             ([filter, value]) => !(value && !recipe[filter])
@@ -26,7 +28,10 @@ const CategoryRecipesScreen = ({navigation: {getParam, navigate}}) => {
     return (
         <View style={styles.screen}>
             <FlatList data={categoryRecipes} keyExtractor={item => item.id}
-                      renderItem={props => <Recipe navigate={navigate} category={category} {...props}/>}/>
+                      renderItem={props =>
+                          <Recipe navigate={navigate} category={category}
+                                  isFav={favoriteRecipes.includes(props.item.id)}
+                                  {...props}/>}/>
         </View>
     );
 };

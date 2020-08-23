@@ -1,13 +1,14 @@
 import React from 'react';
 import {Dimensions, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
-const Recipe = ({navigate, category, item: {id, title, imageUrl, complexity, duration, affordability, ...item}}) => (
+const Recipe = ({navigate,isFav, category, item: {id, title, imageUrl, complexity, duration, affordability, ...item}}) => (
     <TouchableOpacity activeOpacity={0.8} onPress={() => {
         navigate({
             routeName: 'Recipe',
             params: {
                 recipe: {...item, id, title, imageUrl, complexity, duration, affordability},
-                category
+                category,
+                isFav
             }
         });
     }}>
