@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, FlatList, View} from 'react-native';
+import {StyleSheet, FlatList, View, Text} from 'react-native';
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {useSelector} from "react-redux";
 
@@ -11,6 +11,13 @@ const FavoriteRecipesScreen = ({navigation: {navigate}}) => {
     const favoriteRecipeIds = useSelector(({favoriteRecipes}) => favoriteRecipes);
 
     const favoriteRecipes = RECIPES.filter(({id}) => favoriteRecipeIds.includes(id));
+
+    if (favoriteRecipes.length === 0)
+        return (
+            <View style={styles.screen}>
+                <Text style={styles.title}>No Favorite Recipes found.</Text>
+            </View>
+        );
 
     return (
         <View style={styles.screen}>
@@ -41,6 +48,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    title: {
+        fontFamily: 'libre-baskerville-italic',
+        fontSize: 20
     }
 });
 

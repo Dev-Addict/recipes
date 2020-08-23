@@ -34,7 +34,7 @@ const FiltersScreen = () => {
     );
 };
 
-FiltersScreen.navigationOptions = ({navigation: {toggleDrawer, getParam}}) => ({
+FiltersScreen.navigationOptions = ({navigation: {toggleDrawer}}) => ({
     headerTitle: 'Filters',
     headerStyle: {
         backgroundColor: '#ff6b81'
